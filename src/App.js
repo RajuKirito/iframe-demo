@@ -1,18 +1,23 @@
 import { useEffect } from 'react';
 
 function App() {
-  // Listen for messages from the iframe containing website 2
+  // Store data in local storage
+  useEffect(() => {
+    localStorage.setItem('myData', 'Hello from website1!');
+  }, []);
+
+  // Listen for messages from website2
   useEffect(() => {
     window.addEventListener('message', event => {
       if (event.origin === 'https://app.parchaa.com/version-raju-25-2/login-doctor') {
-        console.log('Received message from website 2:', event.data);
+        console.log('Received message from website2:', event.data);
       }
     });
   }, []);
 
   return (
     <div>
-      <iframe id="website2-iframe" src="https://app.parchaa.com/version-raju-25-2/login-doctor"></iframe>
+      <h1>Website 1</h1>
     </div>
   );
 }
