@@ -99,7 +99,8 @@ const App = () => {
     // Check that the message is coming from website 2
   
     // If the message is 'getData', send the local storage data to website 2
-  
+      console.log("in web");
+    console.log(event.origin);
       event.source.postMessage("data", event.origin);
     
   }
