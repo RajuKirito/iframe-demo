@@ -78,6 +78,7 @@ const App = () => {
 // Listen for messages from website 2
 window.addEventListener('message', receiveMessage, false);
 function receiveMessage(event) {
+  console.log("function called");
   // Check that the message is coming from website 2
   if (event.origin !== 'https://app.parchaa.com/version-raju-25-2/login-doctor') return;
 
