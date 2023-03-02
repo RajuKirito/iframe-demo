@@ -71,18 +71,22 @@ const App = () => {
       localStorage.setItem("user_id", user_id);
     });
 
-  window.addEventListener("message", receiveMessage, false);
-  function receiveMessage(event) {
-    // Check that the message is coming from website 2
-    if (
-      event.origin !== "https://app.parchaa.com/version-raju-25-2/login-doctor"
-    )
-      return;
+  function getLocalStorageData() {
+  return JSON.stringify(localStorage.getItem('user_id'));
+}
 
-    // Send the local storage data to website 2
-    var data = JSON.stringify(localStorage.getItem("user_id"));
+// Listen for messages from website 2
+window.addEventListener('message', receiveMessage, false);
+function receiveMessage(event) {
+  // Check that the message is coming from website 2
+  if (event.origin !== 'https://app.parchaa.com/version-raju-25-2/login-doctor') return;
+
+  // If the message is 'getData', send the local storage data to website 2
+  if (event.data === 'getData') {
+    var data = getLocalStorageData();
     event.source.postMessage(data, event.origin);
   }
+}
   return (
     <div>
       <iframe src="https://app.parchaa.com/version-raju-25-2/login-doctor"></iframe>
